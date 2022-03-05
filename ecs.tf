@@ -89,10 +89,16 @@ resource "aws_security_group_rule" "efs_ingress" {
   protocol                 = "TCP"
 }
 
-resource "aws_efs_mount_target" "wordpress_efs" {
-  for_each        = module.food_vpc.subnet_ids
+# TODO: Find a better way to do this so we don't have to mount twice
+resource "aws_efs_mount_target" "wordpress_efs_a" {
   file_system_id  = aws_efs_file_system.wordpress_persistent.id
-  subnet_id       = each.value
+  subnet_id       = module.food_vpc.subnet_id_a
+  security_groups = [aws_security_group.efs_security_group.id]
+}
+
+resource "aws_efs_mount_target" "wordpress_efs_b" {
+  file_system_id  = aws_efs_file_system.wordpress_persistent.id
+  subnet_id       = module.food_vpc.subnet_id_b
   security_groups = [aws_security_group.efs_security_group.id]
 }
 
