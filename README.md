@@ -1,7 +1,8 @@
 # food.araines.net
+
 Static serverless WordPress site for food/recipes
 
-Utilises the [terraform-aws-serverless-static-wordpress](https://github.com/TechToSpeech/terraform-aws-serverless-static-wordpress) project.  The related [blog post](https://www.techtospeech.com/serverless-static-wordpress-on-aws-for-0-01-a-day/) describes the project in detail.
+Based heavily on the [terraform-aws-serverless-static-wordpress](https://github.com/TechToSpeech/terraform-aws-serverless-static-wordpress) project. The related [blog post](https://www.techtospeech.com/serverless-static-wordpress-on-aws-for-0-01-a-day/) describes the project in detail.
 
 ## Initial setup
 
@@ -11,31 +12,25 @@ Utilises the [terraform-aws-serverless-static-wordpress](https://github.com/Tech
 terraform init
 ```
 
-2. Set up the VPC (currently a necessary workaround)
-
-```
-terraform apply -target="module.food_vpc"
-```
-
-3. Set up initial WordPress build
+2. Set up initial WordPress build
 
 ```
 terraform apply
 ```
 
-4. Start up WordPress and navigate to the admin interface
+3. Start up WordPress (see below) and navigate to the admin interface
 
-5. Install and activate the `wp-recipe-maker` recipe plugin
+4. Install and activate the `wp-recipe-maker` recipe plugin
 
-6. Configure the recipe plugin via the WP Recipe Maker menu item
+5. Configure the recipe plugin via the WP Recipe Maker menu item
 
-7. Install and activate the `Fooding` theme
+6. Install and activate the `Fooding` theme
 
-8. Go to Settings->Permalinks and select Post Name
+7. Go to Settings->Permalinks and select Post Name
 
-9. Go to Settings->General and configure timezones, language etc
+8. Go to Settings->General and configure timezones, language etc
 
-10. Install and activate `Yoast SEO` plugin (consider Rank Math?)
+9. Install and activate `Yoast SEO` plugin (consider Rank Math?)
 
 ## Starting / stopping WordPress
 
@@ -78,4 +73,3 @@ The admin interface can be accessed by [wp-admin](http://wordpress.food.araines.
 ### Generate static site: Unable to fetch URL contents
 
 During the static site generation, if it gets a 500 error with the last log being "Unable to fetch URL contents" then try clearing the caches.
-
