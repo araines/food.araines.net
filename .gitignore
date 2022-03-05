@@ -5,3 +5,7 @@ terraform.out
 
 # Editor files
 **/*.sw[po]
+
+# Build artifacts
+codebuild_files/wordpress_docker.zip
+codebuild_files/php.ini
