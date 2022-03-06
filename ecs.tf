@@ -190,6 +190,16 @@ resource "aws_security_group_rule" "wordpress_sg_egress_80" {
   protocol          = "TCP"
 }
 
+resource "aws_security_group_rule" "wordpress_sg_egress_443" {
+  description       = "Egress from Wordpress container to world on HTTPS"
+  security_group_id = aws_security_group.wordpress_security_group.id
+  cidr_blocks       = ["0.0.0.0/0"]
+  type              = "egress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "TCP"
+}
+
 resource "aws_security_group_rule" "wordpress_sg_egress_3306" {
   description              = "Egress from Wordpress container to Aurora Database"
   security_group_id        = aws_security_group.wordpress_security_group.id
