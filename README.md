@@ -20,17 +20,39 @@ terraform apply
 
 3. Start up WordPress (see below) and navigate to the admin interface
 
-4. Install and activate the `wp-recipe-maker` recipe plugin
+4. Change the admin password
 
-5. Configure the recipe plugin via the WP Recipe Maker menu item
+5. Install and activate the `wp-recipe-maker` recipe plugin
 
-6. Install and activate the `Fooding` theme
+6. Configure the recipe plugin via the WP Recipe Maker menu item
 
-7. Go to Settings->Permalinks and select Post Name
+7. Install and activate the `GeneratePass` theme
 
-8. Go to Settings->General and configure timezones, language etc
+8. Customise the theme
 
-9. Install and activate `Yoast SEO` plugin (consider Rank Math?)
+   a. The following colours:
+
+   ```
+   contrast:   #222222
+   contrast-2: #bc986a
+   contrast-3: #daad86
+   base:       #fbeec1
+   base-2:     #659dbd
+   base-3:     #ffffff
+   accent:     #7e783a
+   ```
+
+   b. Change "Entry meta text" to `accent`
+
+9. Go to Settings->Permalinks and select Post Name
+
+10. Go to Settings->General and configure timezones, language etc
+
+11. Go to Settings->Discussion and disable everything in "Default post settings"
+
+12. Install and activate `Yoast SEO` plugin (consider Rank Math?)
+
+13. Install and activate `UpdraftPlus` plugin for backups / local dev
 
 ## Starting / stopping WordPress
 
@@ -52,11 +74,9 @@ terraform apply
 
 1. Login to `wp-admin`.
 
-2. Go to WP2Static->Options and update the deployment URL to `https://food.araines.net`, then Save Options.
+2. Go to WP2Static->Addons and enable the S3 deployment addon.
 
-3. Go to WP2Static->Addons and enable the S3 deployment addon.
-
-4. Click the settings cog and change the Object ACL to `private`, then Save S3 Options.
+3. Click the settings cog and change the Object ACL to `private`, then Save S3 Options.
 
 ### Normal publication
 
