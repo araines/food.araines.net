@@ -29,22 +29,38 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "website" {
 resource "aws_s3_bucket_public_access_block" "website" {
   bucket                  = aws_s3_bucket.website.id
   block_public_acls       = true
-  block_public_policy     = true
+  block_public_policy     = false
   ignore_public_acls      = true
-  restrict_public_buckets = true
+  restrict_public_buckets = false
 }
 
 resource "aws_cloudfront_origin_access_identity" "website" {
   comment = "${local.site_name} origin access identity for S3"
 }
 
+resource "random_password" "s3_referer_header" {
+  length  = 40
+  special = false
+}
+
 resource "aws_cloudfront_distribution" "website" {
   origin {
-    domain_name = aws_s3_bucket.website.bucket_regional_domain_name
+    domain_name = aws_s3_bucket.website.website_endpoint
     origin_id   = local.s3_origin_id
 
-    s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.website.cloudfront_access_identity_path
+    custom_header {
+      name  = "Referer"
+      value = random_password.s3_referer_header.result
+    }
+    custom_origin_config {
+      http_port                = 80
+      https_port               = 443
+      origin_protocol_policy   = "http-only"
+      origin_keepalive_timeout = 5
+      origin_read_timeout      = 30
+      origin_ssl_protocols = [
+        "TLSv1.2"
+      ]
     }
   }
   enabled             = true
@@ -98,10 +114,8 @@ data "aws_iam_policy_document" "cloudfront_s3_access" {
   statement {
     effect = "Allow"
     principals {
-      type = "AWS"
-      identifiers = [
-        aws_cloudfront_origin_access_identity.website.iam_arn
-      ]
+      type        = "*"
+      identifiers = ["*"]
     }
     actions = [
       "s3:GetObject",
@@ -109,5 +123,12 @@ data "aws_iam_policy_document" "cloudfront_s3_access" {
     resources = [
       "${aws_s3_bucket.website.arn}/*",
     ]
+    condition {
+      test     = "StringEquals"
+      variable = "aws:Referer"
+      values = [
+        random_password.s3_referer_header.result
+      ]
+    }
   }
 }
