@@ -9,6 +9,14 @@ output "subnet_ids" {
   ])
 }
 
+output "subnet_id_a" {
+  value = aws_subnet.food-subnet-public-a.id
+}
+
+output "subnet_id_b" {
+  value = aws_subnet.food-subnet-public-b.id
+}
+
 output "route_table_private" {
   value = aws_route_table.food-private-routetable
 }
