@@ -9,3 +9,7 @@ terraform.out
 # Build artifacts
 codebuild_files/wordpress_docker.zip
 codebuild_files/php.ini
+launcher.zip
+
+# Node modules
+**/node_modules/*

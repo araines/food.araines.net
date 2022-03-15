@@ -1,0 +1,9 @@
+{
+  "name": "launcher",
+  "version": "1.0.0",
+  "main": "launcher.js",
+  "type": "module",
+  "dependencies": {
+    "@aws-sdk/client-ecs": "^3.54.0"
+  }
+}
