@@ -108,3 +108,10 @@ resource "aws_iam_role_policy_attachment" "launcher_ecs" {
   role       = aws_iam_role.launcher.name
   policy_arn = aws_iam_policy.launcher_ecs.arn
 }
+
+# TODO: Create an API Gateway to trigger the lambda
+# Create a Route 53 record for the API Gateway
+# Enhance Lambda to include two pieces of functionality:
+# 1. Serve a basic webpage with a password box + launch/stop buttons
+# 2. A launch URL which checks the password + launches if desired
+# 3. A launch URL which checks the password + shuts down if desired
