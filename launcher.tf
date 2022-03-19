@@ -26,6 +26,11 @@ data "archive_file" "launcher" {
   depends_on  = [null_resource.launcher_npm]
 }
 
+resource "random_password" "launch_password" {
+  length = 40
+  special = false
+}
+
 resource "aws_lambda_function" "launcher" {
   filename         = "launcher.zip"
   function_name    = "${local.site_name}-launcher"
@@ -39,6 +44,7 @@ resource "aws_lambda_function" "launcher" {
       region  = local.aws_region
       cluster = aws_ecs_cluster.wordpress_cluster.name
       service = aws_ecs_service.wordpress_service.id
+      password = random_password.launch_password.result
     }
   }
 }
@@ -146,7 +152,7 @@ resource "aws_apigatewayv2_integration" "launcher" {
 
 resource "aws_apigatewayv2_route" "launcher" {
   api_id    = aws_apigatewayv2_api.launcher.id
-  route_key = "GET /hello"
+  route_key = "POST /launch"
   target    = "integrations/${aws_apigatewayv2_integration.launcher.id}"
 }
 

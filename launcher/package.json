@@ -4,6 +4,7 @@
   "main": "launcher.js",
   "type": "module",
   "dependencies": {
-    "@aws-sdk/client-ecs": "^3.54.0"
+    "@aws-sdk/client-ecs": "^3.54.0",
+    "lambda-multipart-parser": "^1.0.1"
   }
 }
