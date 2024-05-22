@@ -117,6 +117,12 @@ if ! sudo -E -u www-data wp plugin is-installed ewww-image-optimizer; then
   sudo -E -u www-data wp option update ewww_image_optimizer_hide_newsletter_signup 1
 fi
 
+# Install WP Recipe Maker
+if ! sudo -E -u www-data wp plugin is-installed wp-recipe-maker; then
+  echo "WP Recipe Maker not installed: installing WP Recipe Maker"
+  sudo -E -u www-data wp plugin install --activate wp-recipe-maker
+fi
+
 # Update WordPress options with IP of running container
 sudo -E -u www-data wp option update siteurl "http://${CONTAINER_DNS}"
 sudo -E -u www-data wp option update home "http://${CONTAINER_DNS}"
