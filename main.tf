@@ -8,6 +8,14 @@ terraform {
   }
 }
 
+module "oidc" {
+  source = "./oidc"
+
+  repository  = "food.araines.net"
+  site_name   = "food"
+  site_domain = "food.araines.net"
+}
+
 module "wordpress" {
   source = "github.com/araines/aws-static-wordpress"
 

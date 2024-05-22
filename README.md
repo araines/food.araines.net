@@ -1,8 +1,6 @@
 # food.araines.net
 
-Static serverless WordPress site for food/recipes
-
-Based heavily on the [terraform-aws-serverless-static-wordpress](https://github.com/TechToSpeech/terraform-aws-serverless-static-wordpress) project. The related [blog post](https://www.techtospeech.com/serverless-static-wordpress-on-aws-for-0-01-a-day/) describes the project in detail.
+Static WordPress site for food/recipes
 
 ## Initial setup
 
@@ -12,7 +10,13 @@ Based heavily on the [terraform-aws-serverless-static-wordpress](https://github.
 terraform init
 ```
 
-2. Set up initial WordPress build
+2. Set up OIDC with GitHub actions
+
+```
+terraform apply -target module.oidc.module.github-oidc
+```
+
+3. Set up initial WordPress build
 
 ```
 terraform apply
@@ -32,17 +36,17 @@ terraform apply
 
    a. The following colours:
 
-   ```
-   contrast:   #222222
-   contrast-2: #bc986a
-   contrast-3: #daad86
-   base:       #fbeec1
-   base-2:     #659dbd
-   base-3:     #ffffff
-   accent:     #7e783a
-   ```
+```
+contrast: #222222
+contrast-2: #bc986a
+contrast-3: #daad86
+base: #fbeec1
+base-2: #659dbd
+base-3: #ffffff
+accent: #7e783a
+```
 
-   b. Change "Entry meta text" to `accent`
+b. Change "Entry meta text" to `accent`
 
 9. Go to Settings->Permalinks and select Post Name
 
