@@ -60,27 +60,11 @@ b. Change "Entry meta text" to `accent`
 
 ## Starting / stopping WordPress
 
-To start up WordPress:
+To start up WordPress, run the "Launch" workflow in GitHub Actions, with the variable set to 1.
 
-```
-terraform apply -var="launch=1"
-```
-
-To shut down WordPress:
-
-```
-terraform apply
-```
+To shutdown, set the variable to 0.
 
 ## Site publication
-
-### First-time Setup
-
-1. Login to `wp-admin`.
-
-2. Go to WP2Static->Addons and enable the S3 deployment addon.
-
-3. Click the settings cog and change the Object ACL to `private`, then Save S3 Options.
 
 ### Normal publication
 
